@@ -31,8 +31,7 @@ service:
 configMap:
   name: myapp-properties
   data:
-#    application.properties: |
-#      application.name=configMap application name
-#      application.version=configMap application version 1.0.0
+    application.name: "configMap application name"
+    application.version: "configMap application version 1.0.0"
     myapp.greeting: "Hello, World!"
     myconfigmap.hello: "anacondong is here"

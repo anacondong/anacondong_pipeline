@@ -23,11 +23,11 @@ public class DemoApplication {
 	@Value("${demo.application.boolean}")
 	private String b;
 
-//	@Value("${application.properties.application.name:nope}")
-//	private String configMapAppName;
-//
-//	@Value("${application.properties.application.version:nope}")
-//	private String configMapAppVersion;
+	@Value("${application.name:nope}")
+	private String configMapAppName;
+
+	@Value("${application.version:nope}")
+	private String configMapAppVersion;
 
 	@Value("${myapp.greeting:nope}")
 	private String configMapGreeting;
@@ -44,8 +44,8 @@ public class DemoApplication {
 		responseString += "<br/>  application properties int: "+ i;
 		responseString += "<br/>  application properties boolean: "+ b;
 		responseString += "<br/>  ***** ConfigMap properties *****";
-//		responseString += "<br/>  application properties from configMap appName: "+ configMapAppName;
-//		responseString += "<br/>  application properties from configMap appVersion: "+ configMapAppVersion;
+		responseString += "<br/>  application properties from configMap appName: "+ configMapAppName;
+		responseString += "<br/>  application properties from configMap appVersion: "+ configMapAppVersion;
 		responseString += "<br/>  configMap Mapping Value greeting: "+ configMapGreeting;
 		responseString += "<br/>  configMap Mapping Value hello: "+ configMapHello;
 

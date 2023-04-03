@@ -10,8 +10,9 @@ docker push anacondong/myapp
 ## Deploy to k8s
 cd helmChart
 helm lint  << checking helm
-helm template release-myapp ./helmChart -f ./helmChart/values.yaml  << Generate yaml at console
 helm template release-myapp ./helmChart -f ./helmChart/values.yaml > ./helmChart/manifest.yaml
+
+helm template release-myapp ./helmChart -f ./helmChart/values.yaml  << Generate yaml at console
 helm install myapp ./helmChart --values ./helmChart/values.yaml   <<< Install and run k8s
 helm delete myapp
 ## Apply k8s
