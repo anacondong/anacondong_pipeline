@@ -3,7 +3,7 @@
 replicaCount: 1
 
 image:
-  repository: myapp
+  repository: anacondong/myapp
   tag: latest
   pullPolicy: Always
 
