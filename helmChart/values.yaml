@@ -1,0 +1,37 @@
+# values.yaml
+
+replicaCount: 1
+
+image:
+  repository: myapp
+  tag: latest
+  pullPolicy: Always
+
+deployment:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: myapp
+    tag: latest
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+
+service:
+  name: myappservice
+  enabled: true
+  type: ClusterIP
+  port: 8080
+  targetPort: http
+
+configMap:
+  name: myapp-properties
+  data:
+    application.properties: |
+      application.name=myapp
+      application.version=1.0.0
+    myapp.greeting: "Hello, World!"
