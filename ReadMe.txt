@@ -8,7 +8,7 @@ docker tag myapp anacondong/myapp
 docker push anacondong/myapp
 
 ## Deploy to k8s
-helm create helmChart
+cd helmChart
 helm lint  << checking helm
 helm template release-myapp ./helmChart -f ./helmChart/values.yaml  << Generate yaml at console
 helm template release-myapp ./helmChart -f ./helmChart/values.yaml > ./helmChart/manifest.yaml
@@ -23,7 +23,7 @@ kubectl delete -f ./helmChart/manifest.yaml
 
 ## TODO kubectl
 helmChart
-
+helm create helmChart
 deployment
 service
 configMap
