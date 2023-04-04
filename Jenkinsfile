@@ -8,6 +8,12 @@ pipeline {
 
     stages {
 
+        stage('prepare') {
+            steps {
+                sh 'docker version'
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
