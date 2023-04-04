@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'maven:3.8.3-openjdk-17'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+            args '-v /usr/local/bin/docker:/var/run/docker'
         }
     }
 
@@ -21,7 +21,6 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh '/usr/local/bin/docker version'
                 sh 'echo run mvn test'
             }
         }
