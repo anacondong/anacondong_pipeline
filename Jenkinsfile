@@ -10,17 +10,12 @@ pipeline {
 
         stage('Clean') {
             steps {
-                sh 'mvn clean'
+                sh 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
-            }
-        }
-        stage('Install') {
-            steps {
-                sh 'mvn install'
+                // sh 'mvn test'
             }
         }
         stage('Build Docker Image') {
