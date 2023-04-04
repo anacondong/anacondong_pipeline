@@ -50,6 +50,7 @@ public class DemoApplication {
 		responseString += "<br/>  configMap Mapping Value hello: "+ configMapHello;
 
 		return responseString;
+
 	}
 	@GetMapping("/hello")
 	public String helloWorld() {
