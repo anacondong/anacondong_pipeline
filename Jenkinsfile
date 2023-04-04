@@ -6,9 +6,9 @@ pipeline {
         }
     }
     stages {
-        stage('Build') {
+        stage('Clean') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean'
             }
         }
         stage('Test') {
@@ -16,31 +16,29 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('Install') {
+            steps {
+                sh 'mvn install'
+            }
+        }
         stage('Build Docker Image') {
             steps {
-                script {
-                    def dockerImage = docker.build("my-app:${env.BUILD_NUMBER}")
-                }
-            }
+               sh 'docker build -t myapp .'
+             }
         }
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                     sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
                 }
-                script {
-                    def dockerImage = docker.build("my-app:${env.BUILD_NUMBER}")
-                    dockerImage.push()
-                }
+                sh 'docker tag myapp anacondong/myapp'
+                sh 'docker push anacondong/myapp'
             }
         }
         stage('Deploy') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'ssh-credentials', keyFileVariable: 'SSH_KEY_FILE', passphraseVariable: '', usernameVariable: 'SSH_USERNAME')]) {
-                    sshagent(['SSH_KEY_FILE']) {
-                        sh "ssh $SSH_USERNAME@my-server 'docker-compose up -d'"
-                    }
-                }
+                sh 'helm template release-myapp ./helmChart -f ./helmChart/values.yaml > ./helmChart/manifest.yaml'
+                sh 'kubectl apply -f ./helmChart/manifest.yaml'
             }
         }
     }

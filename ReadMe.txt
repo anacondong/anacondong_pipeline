@@ -32,7 +32,7 @@ Secret
 
 ** Jenkins pipeline state
 docker pull jenkins/jenkins
-docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins
+docker run -p 8085:8080 -p 50000:50000 jenkins/jenkins
 
 /state
 init
