@@ -14,6 +14,8 @@ pipeline {
                 label 'local'
             }
             steps {
+                sh 'source ~/.bashrc'
+                sh 'source ~/.zshenv'
                 sh 'mvn clean package'
             }
         }
