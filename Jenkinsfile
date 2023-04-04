@@ -10,9 +10,6 @@ pipeline {
         }
 
         stage('Clean package') {
-            agent {
-                label 'local'
-            }
             steps {
                 sh 'source ~/.zshenv'
                 sh 'mvn clean package'
@@ -26,9 +23,6 @@ pipeline {
         }
 
         stage('Build And Push Docker Image') {
-            agent {
-                label 'local'
-            }
             steps {
                 sh 'docker build -t myapp .'
                 withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
@@ -40,9 +34,6 @@ pipeline {
         }
 
         stage('Deploy') {
-            agent {
-                label 'local'
-            }
             steps {
                 sh 'helm template release-myapp ./helmChart -f ./helmChart/values.yaml > ./helmChart/manifest.yaml'
                 sh 'kubectl apply -f ./helmChart/manifest.yaml'
