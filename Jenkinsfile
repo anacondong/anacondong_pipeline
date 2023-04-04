@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'docker version'
+                sh '/usr/local/bin/docker version'
                 sh 'echo run mvn test'
             }
         }
