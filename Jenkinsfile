@@ -14,31 +14,24 @@ pipeline {
             }
         }
 
-         stage('prepare') {
-            steps {
-                sh 'docker version'
-            }
-        }
-
         stage('Clean') {
             steps {
                 sh 'mvn clean package'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'echo run mvn test'
-            }
-        }
-
         stage('Build Docker Image') {
+            agent {
+                docker {
+                    image 'docker'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock'
+                }
+            }
             steps {
                 script {
-                    def dockerImage = docker.build("myapp")
+                    docker.build("myapp")
                 }
             }
         }
-
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
