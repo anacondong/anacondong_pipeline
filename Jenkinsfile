@@ -25,16 +25,20 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-               sh 'docker build -t myapp .'
-             }
+                script {
+                    def dockerImage = docker.build("myapp")
+                }
+            }
         }
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                     sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
                 }
-                sh 'docker tag myapp anacondong/myapp'
-                sh 'docker push anacondong/myapp'
+                script {
+                    def dockerImage = docker.build("myapp")
+                    dockerImage.push()
+                }
             }
         }
         stage('Deploy') {
