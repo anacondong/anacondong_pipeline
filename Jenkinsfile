@@ -14,24 +14,25 @@ pipeline {
             }
         }
 
-        stage('Clean') {
+        stage('Clean package') {
             steps {
                 sh 'mvn clean package'
             }
         }
-        stage('Build Docker Image') {
-            agent {
-                docker {
-                    image 'docker'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock'
-                }
-            }
+
+        stage('test') {
             steps {
-                script {
-                    docker.build("myapp")
-                }
+                sh 'echo mvn test'
             }
         }
+
+        stage('Build Docker Image') {
+
+            steps {
+                sh 'docker build -t myapp .'
+            }
+        }
+
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
@@ -43,6 +44,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy') {
             steps {
                 sh 'helm template release-myapp ./helmChart -f ./helmChart/values.yaml > ./helmChart/manifest.yaml'
