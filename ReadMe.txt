@@ -30,9 +30,9 @@ service
 configMap
 Secret
 
-** Jenkins pipeline state
+** Jenkins pipeline state (with Docker) But I prefer install locally
 docker pull jenkins/jenkins
-docker run -p 8085:8080 -p 50000:50000 jenkins/jenkins
+docker run -p 8085:8080 -p 50000:50000 jenkins/jenkins -v $(which docker):/usr/bin/docker
 
 /state
 init
@@ -45,5 +45,14 @@ push lib
 docker img, build, tag, push
 Deployment  >> EKS, Kubectl, HelmChart
 
+
+
+** Install jenkins locally
+https://www.jenkins.io/download/lts/macos/
+brew install jenkins-lts
+brew services start jenkins-lts
+brew services stop jenkins-lts
+
+issue: https://stackoverflow.com/questions/40043004/docker-command-not-found-mac-mini-only-happens-in-jenkins-shell-step-but-wo/58688536#58688536
 
 
