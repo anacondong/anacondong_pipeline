@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                // sh 'mvn test'
+                sh 'echo run mvn test'
             }
         }
         stage('Build Docker Image') {
