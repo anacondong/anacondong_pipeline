@@ -8,13 +8,6 @@ pipeline {
 
     stages {
 
-        stage('Install Docker') {
-            steps {
-                sh 'curl -fsSL https://get.docker.com -o get-docker.sh'
-                sh 'sh get-docker.sh'
-            }
-        }
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -31,6 +24,7 @@ pipeline {
                 sh 'echo run mvn test'
             }
         }
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -38,6 +32,7 @@ pipeline {
                 }
             }
         }
+
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
