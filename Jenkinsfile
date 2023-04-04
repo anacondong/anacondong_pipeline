@@ -21,6 +21,24 @@ pipeline {
             }
         }
 
+        stage('Code Coverage') {
+            steps {
+                sh 'echo run SonaQube , IQ Server'
+            }
+        }
+
+        stage('Mutation test') {
+                    steps {
+                        sh 'echo run Mutation test'
+                    }
+                }
+
+        stage('security check') {
+            steps {
+                sh 'echo run Aquasec'
+            }
+        }
+
         stage('Build And Push Docker Image') {
             steps {
                 sh 'docker build -t myapp .'
