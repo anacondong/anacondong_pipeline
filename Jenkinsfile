@@ -11,8 +11,7 @@ pipeline {
 
         stage('Clean package') {
             steps {
-                sh 'source ~/.zshenv'
-                sh 'mvn clean package'
+                sh '/Users/anacondong/apache-maven-3.9.0/bin/mvn clean package'
             }
         }
 
