@@ -39,6 +39,7 @@ public class DemoApplication {
 	public String demo() {
 
 		String responseString = "Hello This is Demo ";
+		responseString += "<br/>  ====================================";
 		responseString += "<br/> ***** API properties *****";
 		responseString += "<br/>  application properties string: "+ s;
 		responseString += "<br/>  application properties int: "+ i;
@@ -49,6 +50,7 @@ public class DemoApplication {
 		responseString += "<br/>  configMap Mapping Value greeting: "+ configMapGreeting;
 		responseString += "<br/>  configMap Mapping Value hello: "+ configMapHello;
 
+		responseString += "<br/>  ====================================";
 		return responseString;
 
 	}
