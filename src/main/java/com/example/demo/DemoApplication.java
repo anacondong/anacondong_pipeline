@@ -49,7 +49,7 @@ public class DemoApplication {
 		responseString += "<br/>  application properties from configMap appVersion: "+ configMapAppVersion;
 		responseString += "<br/>  configMap Mapping Value greeting: "+ configMapGreeting;
 		responseString += "<br/>  configMap Mapping Value hello: "+ configMapHello;
-
+		responseString += "<br/> Ken ken";
 		responseString += "<br/>  ====================================";
 		return responseString;
 
