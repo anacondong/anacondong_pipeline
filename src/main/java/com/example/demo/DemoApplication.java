@@ -1,10 +1,19 @@
 package com.example.demo;
 
+import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 @RestController
@@ -57,5 +66,22 @@ public class DemoApplication {
 	@GetMapping("/hello")
 	public String helloWorld() {
 		return "Hello World!";
+	}
+
+	@GetMapping("/user")
+	public List<User> getUser() {
+		return Arrays.asList(new User("q", "sq"), new User("d", "sd"));
+	}
+
+	@GetMapping("/docker-user")
+	public List<User> getDockerUser() {
+		RestTemplate restTemplate = new RestTemplate();
+
+		// finding your ip to url
+		ResponseEntity<List<User>> response =
+				restTemplate.exchange("http://111.11.111.1:8081/user",
+						HttpMethod.GET, null, new ParameterizedTypeReference<List<User>>() {
+						});
+		return response.getBody();
 	}
 }
