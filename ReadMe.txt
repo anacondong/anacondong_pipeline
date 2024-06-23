@@ -56,3 +56,6 @@ brew services stop jenkins-lts
 issue: https://stackoverflow.com/questions/40043004/docker-command-not-found-mac-mini-only-happens-in-jenkins-shell-step-but-wo/58688536#58688536
 
 
+#### sideCar project with istio gateway
+install istio >> helm install istio-base istio/base -n istio-system --set defaultRevision=default
+Enable Automatic Sidecar Injection >> kubectl label namespace <namespace> istio-injection=enabled

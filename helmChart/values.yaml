@@ -1,4 +1,7 @@
 # values.yaml
+app:
+  name: myapp
+  namespace: dev
 
 replicaCount: 1
 
