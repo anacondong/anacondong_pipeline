@@ -57,5 +57,7 @@ issue: https://stackoverflow.com/questions/40043004/docker-command-not-found-mac
 
 
 #### sideCar project with istio gateway
-install istio >> helm install istio-base istio/base -n istio-system --set defaultRevision=default
+install istio >> curl -L https://istio.io/downloadIstio | sh -
+
+Istio deploy >> helm install istio-base istio/base -n istio-system --set defaultRevision=default
 Enable Automatic Sidecar Injection >> kubectl label namespace <namespace> istio-injection=enabled
