@@ -1,0 +1,48 @@
+Install Istio:
+
+Download the Istio release package: curl -L https://istio.io/downloadIstio | sh -
+Move to the Istio package directory, e.g., cd istio-1.14.1.
+Add the istioctl client to your path: export PATH=$PWD/bin:$PATH.
+Install Istio in Kubernetes:
+
+Install the Istio control plane: istioctl install --set profile=demo -y.
+Verify the installation: kubectl get pods -n istio-system.
+Deploy a Sample Application:
+
+Label the default namespace to enable Istio injection: kubectl label namespace default istio-injection=enabled.
+Deploy the sample application (e.g., Bookinfo):
+bash
+Copy code
+kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+Verify the application pods are up and running: kubectl get pods.
+Expose the Application:
+
+Apply the Istio gateway:
+bash
+Copy code
+kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+Verify the gateway creation: kubectl get gateway.
+Access the Application:
+
+Determine the ingress IP and port:
+bash
+Copy code
+kubectl get svc istio-ingressgateway -n istio-system
+Access the application using the external IP and port, for example: http://<EXTERNAL-IP>:<PORT>/productpage.
+Example Commands for Bookinfo Application
+bash
+Copy code
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.14/samples/bookinfo/platform/kube/bookinfo.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.14/samples/bookinfo/networking/bookinfo-gateway.yaml
+kubectl get svc istio-ingressgateway -n istio-system
+By following these steps, you should be able to set up a demo project using Kubernetes and Istio on Docker Desktop. If you encounter any issues, feel free to ask for further assistance.
+
+
+*** checking Connectivity
+kubectl run -it --rm --image=cur
+limages/curl curly -- sh
+
+*** using curl in the POD
+curl http://hello-world.local:8080
+
+kubectl port-forward svc/hello-world 8080:8080 -n local
