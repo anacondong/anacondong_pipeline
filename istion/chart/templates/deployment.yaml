@@ -1,0 +1,20 @@
+apiVersion: apps/v1  # Specifies the API version for the Deployment resource
+kind: Deployment  # Defines the type of Kubernetes resource
+metadata:
+  name: api  # The name of the Deployment
+  namespace: local  # The namespace where the Deployment is created
+spec:
+  replicas: 1  # Number of pod replicas
+  selector:
+    matchLabels:
+      app: api  # Selector to match pods with label "app: api"
+  template:
+    metadata:
+      labels:
+        app: api  # Labels to apply to the pods
+    spec:
+      containers:
+        - name: api  # The name of the container
+          image: {{ .Values.deployment.image }}  # The container image to use
+          ports:
+            - containerPort: 8080  # The port that the container will expose

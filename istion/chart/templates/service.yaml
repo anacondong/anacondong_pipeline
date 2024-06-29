@@ -1,0 +1,13 @@
+apiVersion: v1  # Specifies the API version for the Service resource
+kind: Service  # Defines the type of Kubernetes resource
+metadata:
+  name: api  # The name of the Service
+  namespace: local  # The namespace where the Service is created
+  labels:
+    app: api  # Labels for the Service, useful for selectors
+spec:
+  ports:
+    - port: 8080  # The port that the Service will expose
+      name: http  # The name of the port
+  selector:
+    app: api  # Selector to match the pods with label "app: api"

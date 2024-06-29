@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1  # Specifies the API version for the ClusterRoleBinding resource
+kind: ClusterRoleBinding  # Defines the type of Kubernetes resource
+metadata:
+  name: default-view  # The name of the ClusterRoleBinding
+  namespace: local  # The namespace where the ClusterRoleBinding is created
+subjects:
+  - kind: ServiceAccount  # The type of subject being referenced (ServiceAccount)
+    name: default  # The name of the ServiceAccount
+    namespace: default  # The namespace of the ServiceAccount
+roleRef:
+  kind: ClusterRole  # The type of role being referenced
+  name: view  # The name of the ClusterRole
+  apiGroup: rbac.authorization.k8s.io  # The API group of the ClusterRole

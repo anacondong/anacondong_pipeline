@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3  # Specifies the API version for the Gateway resource
+kind: Gateway  # Defines the type of Kubernetes resource
+metadata:
+  name: api-gateway  # The name of the Gateway
+  namespace: local  # The namespace where the Gateway is created
+spec:
+  selector:
+    istio: ingressgateway  # Selector to match the ingress gateway pods
+  servers:
+    - port:
+        number: 80  # The port that the Gateway will expose
+        name: http  # The name of the port
+        protocol: HTTP  # The protocol to use
+      hosts:
+        - "*"  # The hosts that the Gateway will serve

@@ -1,0 +1,6 @@
+
+app: api
+namespace: local
+
+deployment:
+  image: anacondong/myapp:latest

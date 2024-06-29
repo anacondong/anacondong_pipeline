@@ -9,7 +9,7 @@ Install the Istio control plane: istioctl install --set profile=demo -y.
 Verify the installation: kubectl get pods -n istio-system.
 Deploy a Sample Application:
 
-Label the default namespace to enable Istio injection: kubectl label namespace default istio-injection=enabled.
+Label the default namespace to enable Istio injection: kubectl label namespace default istio-injection=enabled
 Deploy the sample application (e.g., Bookinfo):
 bash
 Copy code
