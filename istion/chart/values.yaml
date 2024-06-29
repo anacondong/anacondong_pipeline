@@ -4,3 +4,6 @@ namespace: local
 
 deployment:
   image: anacondong/myapp:latest
+
+service:
+  port: 30001

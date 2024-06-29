@@ -6,8 +6,11 @@ metadata:
   labels:
     app: api  # Labels for the Service, useful for selectors
 spec:
+  type: NodePort  # Change service type to NodePort for external access
   ports:
-    - port: 8080  # The port that the Service will expose
-      name: http  # The name of the port
+    - port: 8080
+      targetPort: 8080
+      nodePort: {{ .Values.service.port }}   # Specify a node port for external access (30001 is an example)
+      name: http
   selector:
-    app: api  # Selector to match the pods with label "app: api"
+    app: api
